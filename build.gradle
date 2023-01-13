@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+
+    mavenCentral()
+    google()
+    maven {
+        url 'https://repo1.maven.org/maven2/'
+    }
+}
+
+dependencies {
+    implementation 'org.ow2.asm:asm:7.0'
+    implementation 'org.ow2.asm:asm-commons:7.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+}
+
+
+test {
+    useJUnitPlatform()
+}
