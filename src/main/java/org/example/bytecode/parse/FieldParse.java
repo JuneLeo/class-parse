@@ -8,21 +8,32 @@ import java.util.List;
 
 public class FieldParse implements Parse {
     public int fieldCount;
-    public AccessFlagParse accessFlag;
 
-    public int nameIndex;
-
-    public int descriptorIndex;
-
-    public int attributeCount;
-
-    public List<AttributeInfoParse> attributeInfoPars = new ArrayList<>();
+    List<FieldItemParse> fieldItemParses = new ArrayList<>();
 
     @Override
     public int parse(int start, byte[] bytes) {
         fieldCount = Utils.getU2Int(start, bytes);
         start += 2;
         for (int i = 0; i < fieldCount; i++) {
+            FieldItemParse fieldItemParse = new FieldItemParse();
+            start = fieldItemParse.parse(start, bytes);
+            fieldItemParses.add(fieldItemParse);
+        }
+
+        return start;
+    }
+
+    public static class FieldItemParse implements Parse {
+        public AccessFlagParse accessFlag;
+        public int nameIndex;
+        public int descriptorIndex;
+        public int attributeCount;
+
+        public List<AttributeInfoParse> attributeInfoPars = new ArrayList<>();
+
+        @Override
+        public int parse(int start, byte[] bytes) {
             accessFlag = new AccessFlagParse();
             start = accessFlag.parse(start, bytes);
             nameIndex = Utils.getU2Int(start, bytes);
@@ -36,8 +47,7 @@ public class FieldParse implements Parse {
                 start = attributeInfoParse.parse(start, bytes);
                 attributeInfoPars.add(attributeInfoParse);
             }
+            return start;
         }
-
-        return start;
     }
 }
