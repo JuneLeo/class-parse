@@ -30,7 +30,11 @@ public class ClassFormat {
         for (Parse pars : parses) {
             start = pars.parse(start, bytes);
         }
-        Gson gson = new Gson();
-        System.out.println(gson.toJson(parses));
+//        Gson gson = new Gson();
+//        System.out.println(gson.toJson(parses));
+
+        for (Parse pars : parses) {
+            System.out.println(pars);
+        }
     }
 }

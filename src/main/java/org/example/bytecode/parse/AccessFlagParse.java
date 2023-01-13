@@ -25,4 +25,17 @@ public class AccessFlagParse implements Parse {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String accessFlag : accessFlags) {
+            stringBuilder.append(accessFlag);
+            stringBuilder.append(",");
+        }
+        return "AccessFlagParse{" +
+                "value=" + value +
+                ", accessFlags=" + stringBuilder +
+                '}';
+    }
 }

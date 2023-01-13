@@ -24,6 +24,14 @@ public class FieldParse implements Parse {
         return start;
     }
 
+    @Override
+    public String toString() {
+        return "FieldParse{" +
+                "fieldCount=" + fieldCount +
+                ", fieldItemParses=" + Utils.getListToString(fieldItemParses) +
+                '}';
+    }
+
     public static class FieldItemParse implements Parse {
         public AccessFlagParse accessFlag;
         public int nameIndex;
@@ -48,6 +56,17 @@ public class FieldParse implements Parse {
                 attributeInfoPars.add(attributeInfoParse);
             }
             return start;
+        }
+
+        @Override
+        public String toString() {
+            return "FieldItemParse{" +
+                    "accessFlag=" + accessFlag +
+                    ", nameIndex=" + nameIndex +
+                    ", descriptorIndex=" + descriptorIndex +
+                    ", attributeCount=" + attributeCount +
+                    ", attributeInfoPars=" + Utils.getListToString(attributeInfoPars) +
+                    '}';
         }
     }
 }

@@ -1,6 +1,8 @@
 package org.example.bytecode;
 
 import java.nio.ByteBuffer;
+import java.util.Collection;
+import java.util.Objects;
 
 public class Utils {
 
@@ -53,5 +55,15 @@ public class Utils {
         buffer.put(bytes, start, length);
         buffer.flip();
         return buffer.getDouble();
+    }
+
+
+    public static <T> String getListToString(Collection<T> collection) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (T objects : collection) {
+            stringBuilder.append(objects.toString());
+            stringBuilder.append(",");
+        }
+        return stringBuilder.toString();
     }
 }

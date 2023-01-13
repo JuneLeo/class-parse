@@ -22,4 +22,13 @@ public class AttributeParse implements Parse {
         }
         return start;
     }
+
+
+    @Override
+    public String toString() {
+        return "AttributeParse{" +
+                "attributeCount=" + attributeCount +
+                ", attributeInfoPars=" + Utils.getListToString(attributeInfoPars) +
+                '}';
+    }
 }

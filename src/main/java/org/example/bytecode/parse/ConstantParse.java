@@ -36,16 +36,10 @@ public class ConstantParse implements Parse {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Parse parse : constantParse) {
-            String s = parse.toString();
-            stringBuilder.append(s);
-            stringBuilder.append(",");
-        }
 
         return "ConstantPoolParse{" +
                 "constantPoolCount=" + constantPoolCount +
-                ", constantParse=" + stringBuilder +
+                ", constantParse=" + Utils.getListToString(constantParse) +
                 '}';
     }
 

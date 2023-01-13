@@ -28,6 +28,15 @@ public class AttributeInfoParse implements Parse {
         return start;
     }
 
+    @Override
+    public String toString() {
+        return "AttributeInfoParse{" +
+                "nameIndex=" + nameIndex +
+                ", attributeLength=" + attributeLength +
+                ", infos=" + Utils.getListToString(infos) +
+                '}';
+    }
+
     public static class Info implements Parse {
         public int value;
 
@@ -36,5 +45,13 @@ public class AttributeInfoParse implements Parse {
             value = Utils.getU1Int(start, bytes);
             return start + 1;
         }
+
+        @Override
+        public String toString() {
+            return "Info{" +
+                    "value=" + value +
+                    '}';
+        }
     }
+
 }

@@ -17,4 +17,12 @@ public class ClassExtParse implements Parse {
 
         return start;
     }
+
+    @Override
+    public String toString() {
+        return "ClassExtParse{" +
+                "thisClassIndex=" + thisClassIndex +
+                ", superClassIndex=" + superClassIndex +
+                '}';
+    }
 }

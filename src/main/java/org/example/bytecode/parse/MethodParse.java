@@ -8,7 +8,6 @@ import java.util.List;
 
 public class MethodParse implements Parse {
     public int methodCount;
-    public AccessFlagParse accessFlag;
 
     public List<MethodItemParse> methodItemParses = new ArrayList<>();
 
@@ -23,6 +22,14 @@ public class MethodParse implements Parse {
         }
 
         return start;
+    }
+
+    @Override
+    public String toString() {
+        return "MethodParse{" +
+                "methodCount=" + methodCount +
+                ", methodItemParses=" + Utils.getListToString(methodItemParses) +
+                '}';
     }
 
     public static class MethodItemParse implements Parse {
@@ -49,6 +56,18 @@ public class MethodParse implements Parse {
                 attributeInfoPars.add(attributeInfoParse);
             }
             return start;
+        }
+
+
+        @Override
+        public String toString() {
+            return "MethodItemParse{" +
+                    "accessFlag=" + accessFlag +
+                    ", nameIndex=" + nameIndex +
+                    ", descriptorIndex=" + descriptorIndex +
+                    ", attributeCount=" + attributeCount +
+                    ", attributeInfoPars=" + attributeInfoPars +
+                    '}';
         }
     }
 }

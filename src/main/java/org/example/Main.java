@@ -10,7 +10,7 @@ import java.io.UnsupportedEncodingException;
 
 public class Main {
 
-    public static byte[] clzByteCode = {-54, -2, -70, -66, 0, 0, 0, 52, 0, 49, 10, 0, 10, 0, 27, 9, 0, 9, 0, 28, 9, 0, 9, 0, 29,
+    public static byte[] defaultByteCode = {-54, -2, -70, -66, 0, 0, 0, 52, 0, 49, 10, 0, 10, 0, 27, 9, 0, 9, 0, 28, 9, 0, 9, 0, 29,
             8, 0, 30, 10, 0, 31, 0, 32, 9, 0, 33, 0, 34, 8, 0, 35, 10, 0, 36, 0, 37, 7, 0, 38, 7, 0, 39, 1, 0, 4, 110, 97, 109,
             101, 1, 0, 18, 76, 106, 97, 118, 97, 47, 108, 97, 110, 103, 47, 83, 116, 114, 105, 110, 103, 59, 1, 0, 3, 97, 103,
             101, 1, 0, 1, 73, 1, 0, 6, 60, 105, 110, 105, 116, 62, 1, 0, 22, 40, 76, 106, 97, 118, 97, 47, 108, 97, 110, 103,
@@ -37,7 +37,41 @@ public class Main {
 
 
     public static void main(String[] args) {
+        // 1.默认class 字节码
         ClassFormat classFormat = new ClassFormat();
-        classFormat.parse(clzByteCode);
+        classFormat.parse(defaultByteCode);
+        // 2.解析本地字节码
+//        byte[] byteCode = readFile("/Users/juneleo/Desktop/MiniAppImpl.class"); // 将路径替换为本地class路径
+//        if (byteCode != null) {
+//            ClassFormat classFormat2 = new ClassFormat();
+//            classFormat2.parse(byteCode);
+//        }
     }
+
+    private static byte[] readFile(String path) {
+        try {
+            byte[] bytes = new byte[1024];
+            byte[] data = null;
+            FileInputStream fileInputStream = new FileInputStream(path);
+            int length = 0;
+            while ((length = fileInputStream.read(bytes)) > 0) {
+                if (data == null) {
+                    data = new byte[length];
+                    System.arraycopy(bytes, 0, data, 0, length);
+                } else {
+                    byte[] copy = new byte[data.length + length];
+                    System.arraycopy(data, 0, copy, 0, data.length);
+                    System.arraycopy(bytes, 0, copy, data.length, length);
+                    data = copy;
+                }
+            }
+
+            return data;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

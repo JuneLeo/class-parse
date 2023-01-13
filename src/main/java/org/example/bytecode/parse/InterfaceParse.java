@@ -24,6 +24,14 @@ public class InterfaceParse implements Parse {
         return start;
     }
 
+    @Override
+    public String toString() {
+        return "InterfaceParse{" +
+                "interfacesCount=" + interfacesCount +
+                ", interfaceInfoParses=" + Utils.getListToString(interfaceInfoParses) +
+                '}';
+    }
+
     public static class InterfaceInfoParse implements Parse {
         public int index;
 
@@ -32,6 +40,13 @@ public class InterfaceParse implements Parse {
             index = Utils.getU2Int(start, bytes);
             start += 2;
             return start;
+        }
+
+        @Override
+        public String toString() {
+            return "InterfaceInfoParse{" +
+                    "index=" + index +
+                    '}';
         }
     }
 }
