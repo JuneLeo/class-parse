@@ -1,6 +1,5 @@
 package org.example.bytecode.parse.constant;
 
-import org.example.bytecode.Parse;
 import org.example.bytecode.Utils;
 
 public class ConstantFloatInfoParse extends ConstantInfoParse implements Parse {

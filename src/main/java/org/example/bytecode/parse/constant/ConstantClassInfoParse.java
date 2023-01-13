@@ -1,10 +1,9 @@
 package org.example.bytecode.parse.constant;
 
-import org.example.bytecode.Parse;
 import org.example.bytecode.Utils;
 
 public class ConstantClassInfoParse extends ConstantInfoParse implements Parse {
-    public int index;
+    public int nameIndex;
 
     public ConstantClassInfoParse(int tag, String name) {
         super(tag, name);
@@ -13,7 +12,7 @@ public class ConstantClassInfoParse extends ConstantInfoParse implements Parse {
 
     @Override
     public int parse(int start, byte[] bytes) {
-        index = Utils.getU2Int(start, bytes);
+        nameIndex = Utils.getU2Int(start, bytes);
         start += 2;
         return start;
     }
@@ -21,7 +20,7 @@ public class ConstantClassInfoParse extends ConstantInfoParse implements Parse {
     @Override
     public String toString() {
         return "ConstantClassInfoParse{" +
-                "index=" + index +
+                "index=" + nameIndex +
                 ", tag=" + tag +
                 ", name=" + name +
                 '}';

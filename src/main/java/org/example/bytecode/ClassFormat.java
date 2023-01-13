@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
+import org.example.bytecode.parse.constant.Parse;
 
 public class ClassFormat {
     private List<Parse> parses = new ArrayList<>();

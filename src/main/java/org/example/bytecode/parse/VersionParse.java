@@ -1,6 +1,6 @@
 package org.example.bytecode.parse;
 
-import org.example.bytecode.Parse;
+import org.example.bytecode.parse.constant.Parse;
 import org.example.bytecode.Utils;
 
 public class VersionParse implements Parse {

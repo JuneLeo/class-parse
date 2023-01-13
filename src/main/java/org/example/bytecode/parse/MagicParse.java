@@ -1,6 +1,6 @@
 package org.example.bytecode.parse;
 
-import org.example.bytecode.Parse;
+import org.example.bytecode.parse.constant.Parse;
 
 public class MagicParse implements Parse { //u4
 

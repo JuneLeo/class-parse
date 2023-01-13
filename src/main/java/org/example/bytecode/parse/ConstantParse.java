@@ -1,6 +1,6 @@
 package org.example.bytecode.parse;
 
-import org.example.bytecode.Parse;
+import org.example.bytecode.parse.constant.Parse;
 import org.example.bytecode.Utils;
 import org.example.bytecode.parse.constant.*;
 
@@ -24,7 +24,8 @@ public class ConstantParse implements Parse {
         for (int i = 0; i < constantPoolCount - 1; i++) {
             int tag = Utils.getU1Int(start, bytes);
             start += 1;
-            Parse p = getConstantParse(tag);
+            ConstantInfoParse p = getConstantParse(tag);
+            p.setIndex(i + 1);
             constantParse.add(p);
             start = p.parse(start, bytes);
         }
@@ -48,7 +49,7 @@ public class ConstantParse implements Parse {
                 '}';
     }
 
-    public Parse getConstantParse(int tag) {
+    public ConstantInfoParse getConstantParse(int tag) {
         switch (tag) {
             case 1:
                 return new ConstantUtf8InfoParse(tag, "CONSTANT_Utf8_info");
