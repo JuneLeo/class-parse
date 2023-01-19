@@ -2,6 +2,10 @@ package org.example.bytecode.parse.attribute;
 
 import org.example.bytecode.Utils;
 import org.example.bytecode.parse.ConstantParse;
+import org.example.bytecode.parse.constant.Parse;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CodeParse extends AttributeFormatParse {
     public int attributeNameIndex;
@@ -12,7 +16,11 @@ public class CodeParse extends AttributeFormatParse {
 
     public int exceptionTableLength;
 
-    public int attributesCount;
+    public int attributeCount;
+
+    public List<AttributeInfoParse> attributeInfoPars = new ArrayList<>();
+
+    public List<ExceptionInfoParse> exceptionInfoParses = new ArrayList<>();
 
 
     private ConstantParse constantParse;
@@ -33,43 +41,105 @@ public class CodeParse extends AttributeFormatParse {
         index += 4;
 
         int l = index + codeLength;
-        while (index < l) {
-            int cmd = Utils.getU1Int(index, code);
-            index += 1;
+        int codeIndex = index;
+        while (codeIndex < l) {
+            int cmd = Utils.getU1Int(codeIndex, code);
+            codeIndex += 1;
             String cmdStr = Utils.getCMD(cmd);
             System.out.print(cmdStr);
             int paramsLength = Utils.getParamsLength(cmd);
             if (paramsLength >= 0) {
                 if (paramsLength == 1) {
-                    int u1Int = Utils.getU1Int(index, code);
+                    int u1Int = Utils.getU1Int(codeIndex, code);
                     Object utfConstant = constantParse.getUtfConstant(u1Int);
                     System.out.print(" " + String.valueOf(utfConstant));
                 } else if (paramsLength == 2) {
-                    int u2Int = Utils.getU2Int(index, code);
+                    int u2Int = Utils.getU2Int(codeIndex, code);
                     Object utfConstant = constantParse.getUtfConstant(u2Int);
                     System.out.print(" " + String.valueOf(utfConstant));
                 } else {
                     for (int i = 0; i < paramsLength; i++) {
-                        System.out.print(" " + Utils.getU1Int(index + i, code));
+                        System.out.print(" " + Utils.getU1Int(codeIndex + i, code));
                     }
                 }
-                index += paramsLength;
+                codeIndex += paramsLength;
+                System.out.print("\n");
             } else {
+                System.out.print("\n");
                 break;
             }
-            System.out.print("\n");
         }
         index += codeLength;
 
+        exceptionTableLength = Utils.getU2Int(index, code);
+        index += 2;
 
-//        exceptionTableLength = Utils.getU2Int(index, code);
-//        index += 2;
-//        // todo exception info
-//        attributeLength = Utils.getU2Int(index, code);
-//        index += 2;
-//        // todo attribute
+        if (exceptionTableLength > 0) {
+            System.out.println("Exception table:");
+            for (int i = 0; i < exceptionTableLength; i++) {
+                ExceptionInfoParse exceptionInfoParse = new ExceptionInfoParse(constantParse);
+                index = exceptionInfoParse.parse(index, code);
+                System.out.println(exceptionInfoParse);
+                exceptionInfoParses.add(exceptionInfoParse);
+            }
+        }
 
+        attributeCount = Utils.getU2Int(index, code);
+        index += 2;
+        for (int j = 0; j < attributeCount; j++) {
+            AttributeInfoParse attributeInfoParse = new AttributeInfoParse(constantParse);
+            index = attributeInfoParse.parse(index, code);
+            attributeInfoPars.add(attributeInfoParse);
+        }
 
         return start + length;
+    }
+
+
+    public static class ExceptionInfoParse implements Parse {
+        public int startPc;
+        public int endPc;
+        public int handlerPc;
+        public int catchType;
+
+        private ConstantParse constantParse;
+
+        public ExceptionInfoParse(ConstantParse constantParse) {
+
+            this.constantParse = constantParse;
+        }
+
+        @Override
+        public int parse(int start, byte[] code) {
+            /**
+             *             from    to  target type
+             *             12    21    32   Class java/lang/RuntimeException
+             *             12    21    48   any
+             *             32    37    48   any
+             *              0    59    62   Class java/lang/Exception
+             */
+            startPc = Utils.getU2Int(start, code);
+            start += 2;
+            endPc = Utils.getU2Int(start, code);
+            start += 2;
+            handlerPc = Utils.getU2Int(start, code);
+            start += 2;
+            catchType = Utils.getU2Int(start, code);
+            start += 2;
+            return start;
+        }
+
+        @Override
+        public String toString() {
+            return
+                    "from=" + startPc +
+                            ", to=" + endPc +
+                            ", target=" + handlerPc +
+                            ", type=" + getCatchType(catchType);
+        }
+
+        private String getCatchType(int catchType) {
+            return catchType == 0 ? "any" : String.valueOf(constantParse.getUtfConstant(catchType));
+        }
     }
 }

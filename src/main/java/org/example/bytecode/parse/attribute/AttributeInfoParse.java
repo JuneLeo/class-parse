@@ -25,9 +25,18 @@ public class AttributeInfoParse implements Parse {
 
         String utfConstant = String.valueOf(constantParse.getUtfConstant(nameIndex));
 
-        switch (utfConstant.toLowerCase()) {
-            case "code":
-                attributeFormatParse = new CodeParse(attributeLength,constantParse);
+        switch (utfConstant) {
+            case "Code":
+                attributeFormatParse = new CodeParse(attributeLength, constantParse);
+                break;
+            case "LineNumberTable":
+                attributeFormatParse = new LineNumberTableParse(attributeLength, constantParse);
+                break;
+            case "LocalVariableTable":
+                attributeFormatParse = new LocalVariableTableParse(attributeLength, constantParse);
+                break;
+            case "SourceFile":
+                attributeFormatParse = new SourceFileParse(attributeLength, constantParse);
                 break;
             default:
                 attributeFormatParse = new Info(attributeLength);
