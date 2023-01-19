@@ -15,14 +15,18 @@ public class ClassFormat {
     public ClassFormat() {
         parses.add(new MagicParse());
         parses.add(new VersionParse());
-        parses.add(new ConstantParse());
+        ConstantParse constantParse = new ConstantParse();
+        parses.add(constantParse);
         parses.add(new AccessFlagParse());
         parses.add(new ClassExtParse());
         parses.add(new InterfaceParse());
-        parses.add(new FieldParse());
-        parses.add(new MethodParse());
-        parses.add(new AttributeParse());
+        parses.add(new FieldParse(constantParse));
+        parses.add(new MethodParse(constantParse));
+        parses.add(new AttributeParse(constantParse));
     }
+
+
+
 
 
     public void parse(byte[] bytes) {

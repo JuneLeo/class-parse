@@ -11,7 +11,7 @@ public class ConstantParse implements Parse {
     public int constantPoolCount;
 
 
-    private List<Parse> constantParse = new ArrayList<>();
+    private List<ConstantInfoParse> constantParse = new ArrayList<>();
 
 
     @Override
@@ -78,4 +78,46 @@ public class ConstantParse implements Parse {
     }
 
 
+    public Object getUtfConstant(int nameIndex) {
+        ConstantInfoParse infoParse = null;
+        for (ConstantInfoParse parse : constantParse) {
+            if (parse.index == nameIndex) {
+                infoParse = parse;
+            }
+        }
+        if (infoParse == null) {
+            throw new RuntimeException("getUtfConstant (infoParse == null) error");
+        }
+        if (infoParse.getClass().equals(ConstantUtf8InfoParse.class)) { //CONSTANT_Utf8_info
+            return ((ConstantUtf8InfoParse) infoParse).value;
+        } else if (infoParse.getClass().equals(ConstantIntegerInfoParse.class)) { //CONSTANT_Integer_info
+            return ((ConstantIntegerInfoParse) infoParse).value;
+        } else if (infoParse.getClass().equals(ConstantFloatInfoParse.class)) { // CONSTANT_Float_info
+            return ((ConstantFloatInfoParse) infoParse).value;
+        } else if (infoParse.getClass().equals(ConstantLongInfoParse.class)) { // CONSTANT_Long_info
+            return ((ConstantLongInfoParse) infoParse).value;
+        } else if (infoParse.getClass().equals(ConstantDoubleInfoParse.class)) { // CONSTANT_Double_info
+            return ((ConstantDoubleInfoParse) infoParse).value;
+        } else if (infoParse.getClass().equals(ConstantClassInfoParse.class)) { // CONSTANT_Class_info
+            return getUtfConstant(((ConstantClassInfoParse) infoParse).nameIndex);
+        } else if (infoParse.getClass().equals(ConstantStringInfoParse.class)) { // CONSTANT_String_info
+            return getUtfConstant(((ConstantStringInfoParse) infoParse).stringIndex);
+        } else if (infoParse.getClass().equals(ConstantFieldRefInfoParse.class)) { // CONSTANT_Fieldref_info
+            return getUtfConstant(((ConstantFieldRefInfoParse) infoParse).classIndex) + "  " + getUtfConstant(((ConstantFieldRefInfoParse) infoParse).nameAndTypeIndex);
+        } else if (infoParse.getClass().equals(ConstantMethodRefInfoParse.class)) { // CONSTANT_Methodref_info
+            return getUtfConstant(((ConstantMethodRefInfoParse) infoParse).classIndex) + "  " + getUtfConstant(((ConstantMethodRefInfoParse) infoParse).nameAndTypeIndex);
+        } else if (infoParse.getClass().equals(ConstantInterfaceInfoParse.class)) { // CONSTANT_Interface-Methodref_info
+            return getUtfConstant(((ConstantInterfaceInfoParse) infoParse).classIndex) + "  " + getUtfConstant(((ConstantInterfaceInfoParse) infoParse).nameAndTypeIndex);
+        } else if (infoParse.getClass().equals(ConstantNameAndTypeInfoParse.class)) { // CONSTANT_NameAndType_info
+            return getUtfConstant(((ConstantNameAndTypeInfoParse) infoParse).nameIndex) + "  " + getUtfConstant(((ConstantNameAndTypeInfoParse) infoParse).signatureIndex);
+        } else if (infoParse.getClass().equals(ConstantMethodHandleInfoParse.class)) { // CONSTANT_Method-Handle_info
+            return getUtfConstant(((ConstantMethodHandleInfoParse) infoParse).referenceIndex);
+        } else if (infoParse.getClass().equals(ConstantMethodTypeInfoParse.class)) { // CONSTANT_Method-type_info
+            return getUtfConstant(((ConstantMethodTypeInfoParse) infoParse).descriptorIndex);
+        } else if (infoParse.getClass().equals(ConstantInvokeDynamicInfoParse.class)) { // CONSTANT_Invoke-Dynamic_info
+            return getUtfConstant(((ConstantInvokeDynamicInfoParse) infoParse).bootstrapMethodAttrIndex) + "  " + getUtfConstant(((ConstantInvokeDynamicInfoParse) infoParse).nameAndTypeIndex);
+        }
+        throw new RuntimeException("getUtfConstant error! ");
+
+    }
 }

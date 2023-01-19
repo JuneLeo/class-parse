@@ -3,8 +3,8 @@ package org.example.bytecode.parse.constant;
 import org.example.bytecode.Utils;
 
 public class ConstantInvokeDynamicInfoParse extends ConstantInfoParse implements Parse {
-    int bootstrapMethodAttrIndex;
-    int nameAndTypeIndex;
+    public int bootstrapMethodAttrIndex;
+    public int nameAndTypeIndex;
 
     public ConstantInvokeDynamicInfoParse(int tag, String name) {
         super(tag, name);

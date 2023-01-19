@@ -1,5 +1,6 @@
 package org.example.bytecode.parse;
 
+import org.example.bytecode.parse.attribute.AttributeInfoParse;
 import org.example.bytecode.parse.constant.Parse;
 import org.example.bytecode.Utils;
 
@@ -11,12 +12,17 @@ public class MethodParse implements Parse {
 
     public List<MethodItemParse> methodItemParses = new ArrayList<>();
 
+    private ConstantParse constantParse;
+    public MethodParse(ConstantParse constantParse) {
+        this.constantParse = constantParse;
+    }
+
     @Override
     public int parse(int start, byte[] bytes) {
         methodCount = Utils.getU2Int(start, bytes);
         start += 2;
         for (int i = 0; i < methodCount; i++) {
-            MethodItemParse methodItemParse = new MethodItemParse();
+            MethodItemParse methodItemParse = new MethodItemParse(constantParse);
             start = methodItemParse.parse(start, bytes);
             methodItemParses.add(methodItemParse);
         }
@@ -40,18 +46,24 @@ public class MethodParse implements Parse {
 
         public List<AttributeInfoParse> attributeInfoPars = new ArrayList<>();
 
+        private ConstantParse constantParse;
+        public MethodItemParse(ConstantParse constantParse) {
+            this.constantParse = constantParse;
+        }
+
         @Override
         public int parse(int start, byte[] bytes) {
             accessFlag = new AccessFlagParse();
             start = accessFlag.parse(start, bytes);
             nameIndex = Utils.getU2Int(start, bytes);
+            System.out.println("方法：" + constantParse.getUtfConstant(nameIndex));
             start += 2;
             descriptorIndex = Utils.getU2Int(start, bytes);
             start += 2;
             attributeCount = Utils.getU2Int(start, bytes);
             start += 2;
             for (int j = 0; j < attributeCount; j++) {
-                AttributeInfoParse attributeInfoParse = new AttributeInfoParse();
+                AttributeInfoParse attributeInfoParse = new AttributeInfoParse(constantParse);
                 start = attributeInfoParse.parse(start, bytes);
                 attributeInfoPars.add(attributeInfoParse);
             }

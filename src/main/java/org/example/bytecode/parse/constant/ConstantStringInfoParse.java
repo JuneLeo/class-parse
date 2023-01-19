@@ -3,7 +3,7 @@ package org.example.bytecode.parse.constant;
 import org.example.bytecode.Utils;
 
 public class ConstantStringInfoParse extends ConstantInfoParse implements Parse {
-    int stringIndex;
+    public int stringIndex;
 
     public ConstantStringInfoParse(int tag, String name) {
         super(tag, name);

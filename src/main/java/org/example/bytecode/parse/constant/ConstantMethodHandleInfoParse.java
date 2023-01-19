@@ -3,8 +3,8 @@ package org.example.bytecode.parse.constant;
 import org.example.bytecode.Utils;
 
 public class ConstantMethodHandleInfoParse extends ConstantInfoParse implements Parse {
-    int referenceKind;
-    int referenceIndex;
+    public int referenceKind;
+    public int referenceIndex;
 
     public ConstantMethodHandleInfoParse(int tag, String name) {
         super(tag, name);

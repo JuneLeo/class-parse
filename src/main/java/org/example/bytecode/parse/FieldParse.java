@@ -1,5 +1,6 @@
 package org.example.bytecode.parse;
 
+import org.example.bytecode.parse.attribute.AttributeInfoParse;
 import org.example.bytecode.parse.constant.Parse;
 import org.example.bytecode.Utils;
 
@@ -10,13 +11,18 @@ public class FieldParse implements Parse {
     public int fieldCount;
 
     List<FieldItemParse> fieldItemParses = new ArrayList<>();
+    private ConstantParse constantParse;
+
+    public FieldParse(ConstantParse constantParse) {
+        this.constantParse = constantParse;
+    }
 
     @Override
     public int parse(int start, byte[] bytes) {
         fieldCount = Utils.getU2Int(start, bytes);
         start += 2;
         for (int i = 0; i < fieldCount; i++) {
-            FieldItemParse fieldItemParse = new FieldItemParse();
+            FieldItemParse fieldItemParse = new FieldItemParse(constantParse);
             start = fieldItemParse.parse(start, bytes);
             fieldItemParses.add(fieldItemParse);
         }
@@ -40,6 +46,12 @@ public class FieldParse implements Parse {
 
         public List<AttributeInfoParse> attributeInfoPars = new ArrayList<>();
 
+        private ConstantParse constantParse;
+
+        public FieldItemParse(ConstantParse constantParse) {
+            this.constantParse = constantParse;
+        }
+
         @Override
         public int parse(int start, byte[] bytes) {
             accessFlag = new AccessFlagParse();
@@ -51,7 +63,7 @@ public class FieldParse implements Parse {
             attributeCount = Utils.getU2Int(start, bytes);
             start += 2;
             for (int j = 0; j < attributeCount; j++) {
-                AttributeInfoParse attributeInfoParse = new AttributeInfoParse();
+                AttributeInfoParse attributeInfoParse = new AttributeInfoParse(constantParse);
                 start = attributeInfoParse.parse(start, bytes);
                 attributeInfoPars.add(attributeInfoParse);
             }

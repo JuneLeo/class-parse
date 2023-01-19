@@ -3,7 +3,7 @@ package org.example.bytecode.parse.constant;
 import org.example.bytecode.Utils;
 
 public class ConstantMethodTypeInfoParse extends ConstantInfoParse implements Parse {
-    int descriptorIndex;
+    public int descriptorIndex;
 
     public ConstantMethodTypeInfoParse(int tag, String name) {
         super(tag, name);

@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 
 public class ConstantUtf8InfoParse extends ConstantInfoParse implements Parse {
     int length;
-    String value;
+    public String value;
 
     public ConstantUtf8InfoParse(int tag, String name) {
         super(tag, name);
