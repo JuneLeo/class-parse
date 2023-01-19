@@ -1,9 +1,12 @@
 package org.example.bytecode.parse.attribute;
 
+import org.example.bytecode.Utils;
 import org.example.bytecode.parse.ConstantParse;
 
-public class ConstantValueParse extends AttributeFormatParse{
+public class ConstantValueParse extends AttributeFormatParse {
     private ConstantParse constantParse;
+    public int constantValueIndex;
+
     public ConstantValueParse(int length, ConstantParse constantParse) {
         super(length);
         this.constantParse = constantParse;
@@ -11,6 +14,15 @@ public class ConstantValueParse extends AttributeFormatParse{
 
     @Override
     public int parse(int start, byte[] code) {
-        return 0;
+        constantValueIndex = Utils.getU2Int(start, code);
+        start += 2;
+        System.out.println("ConstantValue:");
+        System.out.println(this);
+        return start;
+    }
+
+    @Override
+    public String toString() {
+        return Utils.getUtf(constantValueIndex, constantParse);
     }
 }

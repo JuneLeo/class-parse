@@ -11,6 +11,7 @@ public class DeprecatedParse extends AttributeFormatParse{
 
     @Override
     public int parse(int start, byte[] code) {
-        return 0;
+        System.out.println("Deprecated:");
+        return start;
     }
 }

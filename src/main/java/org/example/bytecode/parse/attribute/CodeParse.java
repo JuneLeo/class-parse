@@ -32,11 +32,13 @@ public class CodeParse extends AttributeFormatParse {
 
     @Override
     public int parse(int start, byte[] code) {
+        System.out.println("Code:");
         int index = start;
         maxStack = Utils.getU2Int(index, code);//u2
         index += 2;
         maxLocals = Utils.getU2Int(index, code); //u2
         index += 2;
+        System.out.println("    maxStack=" + maxStack + "  maxLocals=" + maxLocals);
         codeLength = Utils.getU4Int(index, code); //u4
         index += 4;
 
@@ -46,7 +48,7 @@ public class CodeParse extends AttributeFormatParse {
             int cmd = Utils.getU1Int(codeIndex, code);
             codeIndex += 1;
             String cmdStr = Utils.getCMD(cmd);
-            System.out.print(cmdStr);
+            System.out.print("        "+cmdStr);
             int paramsLength = Utils.getParamsLength(cmd);
             if (paramsLength >= 0) {
                 if (paramsLength == 1) {
@@ -79,7 +81,7 @@ public class CodeParse extends AttributeFormatParse {
             for (int i = 0; i < exceptionTableLength; i++) {
                 ExceptionInfoParse exceptionInfoParse = new ExceptionInfoParse(constantParse);
                 index = exceptionInfoParse.parse(index, code);
-                System.out.println(exceptionInfoParse);
+                System.out.println("    " + exceptionInfoParse);
                 exceptionInfoParses.add(exceptionInfoParse);
             }
         }

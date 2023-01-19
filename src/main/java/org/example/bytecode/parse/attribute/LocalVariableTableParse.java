@@ -78,17 +78,14 @@ public class LocalVariableTableParse extends AttributeFormatParse {
 
         @Override
         public String toString() {
-            return "Start=" + startPc +
+            return "    Start=" + startPc +
                     ", Length=" + length +
                     ", Slot=" + index +
-                    ", nameIndex=" + getUtf(nameIndex) +
-                    ", descriptorIndex=" + getUtf(descriptorIndex);
+                    ", nameIndex=" + Utils.getUtf(nameIndex, constantParse) +
+                    ", descriptorIndex=" + Utils.getUtf(descriptorIndex, constantParse);
 
         }
 
 
-        private String getUtf(int catchType) {
-            return String.valueOf(constantParse.getUtfConstant(catchType));
-        }
     }
 }

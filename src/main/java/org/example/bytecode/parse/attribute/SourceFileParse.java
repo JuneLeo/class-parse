@@ -17,7 +17,7 @@ public class SourceFileParse extends AttributeFormatParse {
         sourceFileIndex = Utils.getU2Int(start, code);
         start += 2;
         System.out.println("SourceFile: ");
-        System.out.println(constantParse.getUtfConstant(sourceFileIndex));
+        System.out.println("    " + constantParse.getUtfConstant(sourceFileIndex));
         return start;
     }
 }

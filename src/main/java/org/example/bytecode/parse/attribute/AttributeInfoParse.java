@@ -38,6 +38,30 @@ public class AttributeInfoParse implements Parse {
             case "SourceFile":
                 attributeFormatParse = new SourceFileParse(attributeLength, constantParse);
                 break;
+            case "Exceptions":
+                attributeFormatParse = new ExceptionsParse(attributeLength, constantParse);
+                break;
+            case "ConstantValue":
+                attributeFormatParse = new ConstantValueParse(attributeLength, constantParse);
+                break;
+            case "InnerClasses":
+                attributeFormatParse = new InnerClassParse(attributeLength, constantParse);
+                break;
+            case "Deprecated":
+                attributeFormatParse = new DeprecatedParse(attributeLength, constantParse);
+                break;
+            case "Synthetic":
+                attributeFormatParse = new SyntheticParse(attributeLength, constantParse);
+                break;
+            case "StackMapTable":
+                attributeFormatParse = new StackMapTableParse(attributeLength, constantParse);
+                break;
+            case "Signature":
+                attributeFormatParse = new SignatureParse(attributeLength, constantParse);
+                break;
+            case "BootstrapMethods":
+                attributeFormatParse = new BootstrapMethodsParse(attributeLength, constantParse);
+                break;
             default:
                 attributeFormatParse = new Info(attributeLength);
                 break;

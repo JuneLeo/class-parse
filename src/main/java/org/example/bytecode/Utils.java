@@ -1,5 +1,7 @@
 package org.example.bytecode;
 
+import org.example.bytecode.parse.ConstantParse;
+
 import java.nio.ByteBuffer;
 import java.util.Collection;
 import java.util.Objects;
@@ -189,5 +191,10 @@ public class Utils {
 
     public static int getParamsLength(int cmd) {
         return NO_OF_OPERANDS[cmd];
+    }
+
+
+    public static String getUtf(int index, ConstantParse constantParse) {
+        return String.valueOf(constantParse.getUtfConstant(index));
     }
 }
