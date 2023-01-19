@@ -1,5 +1,6 @@
 package org.example.bytecode.parse;
 
+import org.example.bytecode.AccessFlag;
 import org.example.bytecode.parse.constant.Parse;
 import org.example.bytecode.Utils;
 
@@ -29,13 +30,12 @@ public class AccessFlagParse implements Parse {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (String accessFlag : accessFlags) {
-            stringBuilder.append(accessFlag);
-            stringBuilder.append(",");
+        for (int i = 0; i < accessFlags.size(); i++) {
+            stringBuilder.append(accessFlags.get(i));
+            if (i != accessFlags.size() - 1) {
+                stringBuilder.append(",");
+            }
         }
-        return "AccessFlagParse{" +
-                "value=" + value +
-                ", accessFlags=" + stringBuilder +
-                '}';
+        return stringBuilder.toString();
     }
 }

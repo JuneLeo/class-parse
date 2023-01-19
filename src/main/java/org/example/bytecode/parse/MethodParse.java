@@ -13,6 +13,7 @@ public class MethodParse implements Parse {
     public List<MethodItemParse> methodItemParses = new ArrayList<>();
 
     private ConstantParse constantParse;
+
     public MethodParse(ConstantParse constantParse) {
         this.constantParse = constantParse;
     }
@@ -47,18 +48,30 @@ public class MethodParse implements Parse {
         public List<AttributeInfoParse> attributeInfoPars = new ArrayList<>();
 
         private ConstantParse constantParse;
+
         public MethodItemParse(ConstantParse constantParse) {
             this.constantParse = constantParse;
         }
 
+        /**
+         * public org.example.Main();
+         * descriptor: ()V
+         * flags: ACC_PUBLIC
+         *
+         * @param start
+         * @param bytes
+         * @return
+         */
         @Override
         public int parse(int start, byte[] bytes) {
             accessFlag = new AccessFlagParse();
             start = accessFlag.parse(start, bytes);
             nameIndex = Utils.getU2Int(start, bytes);
-            System.out.println("方法：" + constantParse.getUtfConstant(nameIndex));
+            System.out.println("method: " + constantParse.getUtfConstant(nameIndex));
             start += 2;
             descriptorIndex = Utils.getU2Int(start, bytes);
+            System.out.println("descriptor: " + constantParse.getUtfConstant(descriptorIndex));
+            System.out.println("flags: " + accessFlag);
             start += 2;
             attributeCount = Utils.getU2Int(start, bytes);
             start += 2;

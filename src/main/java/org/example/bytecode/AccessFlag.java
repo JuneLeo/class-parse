@@ -1,4 +1,4 @@
-package org.example.bytecode.parse;
+package org.example.bytecode;
 
 public enum AccessFlag {
     ACC_PUBLIC(0x0001),     // Declared public; may be accessed from outside its package.
@@ -15,7 +15,7 @@ public enum AccessFlag {
     ACC_STRICT(0x0800);
 
 
-    int value;
+    public int value;
 
     AccessFlag(int value) {
         this.value = value;
