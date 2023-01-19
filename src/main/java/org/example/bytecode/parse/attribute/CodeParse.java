@@ -2,7 +2,6 @@ package org.example.bytecode.parse.attribute;
 
 import org.example.bytecode.Utils;
 import org.example.bytecode.parse.ConstantParse;
-import org.example.bytecode.parse.constant.ConstantInfoParse;
 
 public class CodeParse extends AttributeFormatParse {
     public int attributeNameIndex;

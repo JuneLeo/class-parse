@@ -104,3 +104,78 @@ public static int getU2Int(int start, byte[] bytes) {
 }
 ```
 
+# Code解析
+```java
+public class CodeParse extends AttributeFormatParse {
+    public int attributeNameIndex;
+    public int attributeLength;
+    public int maxStack;
+    public int maxLocals;
+    public int codeLength;
+
+    public int exceptionTableLength;
+
+    public int attributesCount;
+
+
+    private ConstantParse constantParse;
+
+    public CodeParse(int length, ConstantParse constantParse) {
+        super(length);
+        this.constantParse = constantParse;
+    }
+
+    @Override
+    public int parse(int start, byte[] code) {
+        int index = start;
+        maxStack = Utils.getU2Int(index, code);//u2
+        index += 2;
+        maxLocals = Utils.getU2Int(index, code); //u2
+        index += 2;
+        codeLength = Utils.getU4Int(index, code); //u4
+        index += 4;
+
+        int l = index + codeLength;
+        while (index < l) {
+            int cmd = Utils.getU1Int(index, code);
+            index += 1;
+            String cmdStr = Utils.getCMD(cmd); // 这里是复制的asm中的字节码数组
+            System.out.print(cmdStr);
+            int paramsLength = Utils.getParamsLength(cmd); // 这里是复制的asm中的字节码后面参数的length数组
+            if (paramsLength >= 0) {
+                if (paramsLength == 1) {
+                    int u1Int = Utils.getU1Int(index, code);
+                    Object utfConstant = constantParse.getUtfConstant(u1Int);
+                    System.out.print(" " + String.valueOf(utfConstant));
+                } else if (paramsLength == 2) {
+                    int u2Int = Utils.getU2Int(index, code);
+                    Object utfConstant = constantParse.getUtfConstant(u2Int);
+                    System.out.print(" " + String.valueOf(utfConstant));
+                } else {
+                    for (int i = 0; i < paramsLength; i++) {
+                        System.out.print(" " + Utils.getU1Int(index + i, code));
+                    }
+                }
+                index += paramsLength;
+            } else {
+                break;
+            }
+            System.out.print("\n");
+        }
+        index += codeLength;
+
+    	// 这里是 exception和attribute，attribute主要解析LineNumberTable和LocalVariableTable即可，后续实现
+//        exceptionTableLength = Utils.getU2Int(index, code);
+//        index += 2;
+//        // todo exception info
+//        attributeLength = Utils.getU2Int(index, code);
+//        index += 2;
+//        // todo attribute
+
+
+        return start + length;
+    }
+}
+
+```
+
