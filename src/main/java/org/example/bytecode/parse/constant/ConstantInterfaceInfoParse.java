@@ -22,11 +22,8 @@ public class ConstantInterfaceInfoParse extends ConstantInfoParse implements Par
 
     @Override
     public String toString() {
-        return "ConstantInterfaceInfoParse{" +
-                "classIndex=" + classIndex +
-                ", nameAndTypeIndex=" + nameAndTypeIndex +
-                ", tag=" + tag +
-                ", name=" + name +
-                '}';
+        return "[ " +"name=" + name +
+                ", classIndex=" + classIndex +
+                ", nameAndTypeIndex=" + nameAndTypeIndex+ " ]";
     }
 }

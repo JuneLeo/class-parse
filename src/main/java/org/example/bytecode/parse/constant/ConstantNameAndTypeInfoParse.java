@@ -21,11 +21,8 @@ public class ConstantNameAndTypeInfoParse extends ConstantInfoParse implements P
 
     @Override
     public String toString() {
-        return "ConstantNameAndTypeInfoParse{" +
-                "nameIndex=" + nameIndex +
-                ", signatureIndex=" + signatureIndex +
-                ", tag=" + tag +
-                ", name=" + name +
-                '}';
+        return "[ " +"name=" + name +
+                ", nameIndex=" + nameIndex +
+                ", signatureIndex=" + signatureIndex+ " ]";
     }
 }

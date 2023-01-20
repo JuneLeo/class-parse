@@ -22,11 +22,8 @@ public class ConstantInvokeDynamicInfoParse extends ConstantInfoParse implements
 
     @Override
     public String toString() {
-        return "ConstantInvokeDynamicInfoParse{" +
-                "bootstrapMethodAttrIndex=" + bootstrapMethodAttrIndex +
-                ", nameAndTypeIndex=" + nameAndTypeIndex +
-                ", tag=" + tag +
-                ", name=" + name +
-                '}';
+        return "[ " +"name=" + name +
+                ", bootstrapMethodAttrIndex=" + bootstrapMethodAttrIndex +
+                ", nameAndTypeIndex=" + nameAndTypeIndex+ " ]";
     }
 }

@@ -13,7 +13,7 @@ public class ConstantUtf8InfoParse extends ConstantInfoParse implements Parse {
     }
 
     @Override
-    public int parse(int start, byte[] bytes)  {
+    public int parse(int start, byte[] bytes) {
         length = Utils.getU2Int(start, bytes);
         start += 2;
         byte[] strCode = new byte[length];
@@ -25,11 +25,8 @@ public class ConstantUtf8InfoParse extends ConstantInfoParse implements Parse {
 
     @Override
     public String toString() {
-        return "ConstantUtf8InfoParse{" +
-                "length=" + length +
-                ", value='" + value + '\'' +
-                ", tag=" + tag +
-                ", name=" + name +
-                '}';
+        return "[ " + "name=" + name +
+                ", length=" + length +
+                ", value='" + value + " ]";
     }
 }

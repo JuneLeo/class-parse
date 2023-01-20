@@ -22,11 +22,8 @@ public class ConstantFieldRefInfoParse extends ConstantInfoParse implements Pars
 
     @Override
     public String toString() {
-        return "ConstantFieldRefInfoParse{" +
-                "classIndex=" + classIndex +
-                ", nameAndTypeIndex=" + nameAndTypeIndex +
-                ", tag=" + tag +
-                ", name=" + name +
-                '}';
+        return "[ " +"name=" + name +
+                ", classIndex=" + classIndex +
+                ", nameAndTypeIndex=" + nameAndTypeIndex + " ]";
     }
 }

@@ -20,10 +20,7 @@ public class ConstantMethodTypeInfoParse extends ConstantInfoParse implements Pa
 
     @Override
     public String toString() {
-        return "ConstantMethodTypeInfoParse{" +
-                "descriptorIndex=" + descriptorIndex +
-                ", tag=" + tag +
-                ", name=" + name +
-                '}';
+        return "[ " +"name=" + name +
+                ", descriptorIndex=" + descriptorIndex+ " ]";
     }
 }

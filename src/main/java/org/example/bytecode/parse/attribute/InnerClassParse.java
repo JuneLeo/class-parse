@@ -25,11 +25,12 @@ public class InnerClassParse extends AttributeFormatParse {
         numberOfClass = Utils.getU2Int(start, code);
         start += 2;
         for (int i = 0; i < numberOfClass; i++) {
+            System.out.print("    ");
             InnerClassInfoParse infoParse = new InnerClassInfoParse(constantParse);
             start = infoParse.parse(start, code);
+            System.out.println("    " +infoParse);
             innerClassInfoParseList.add(infoParse);
         }
-        System.out.println(this);
         return start;
     }
 

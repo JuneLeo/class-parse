@@ -19,10 +19,7 @@ public class ConstantClassInfoParse extends ConstantInfoParse implements Parse {
 
     @Override
     public String toString() {
-        return "ConstantClassInfoParse{" +
-                "index=" + nameIndex +
-                ", tag=" + tag +
-                ", name=" + name +
-                '}';
+        return "[ " + "name=" + name +
+                ", index=" + nameIndex + " ]";
     }
 }

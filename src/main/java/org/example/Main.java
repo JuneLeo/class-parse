@@ -38,14 +38,14 @@ public class Main {
 
     public static void main(String[] args) {
         // 1.默认class 字节码
-//        ClassFormat classFormat = new ClassFormat();
-//        classFormat.parse(defaultByteCode);
+        ClassFormat classFormat = new ClassFormat();
+        classFormat.parse(defaultByteCode);
         // 2.解析本地字节码
-        byte[] byteCode = readFile("/Users/juneleo/Desktop/Main.class"); // 将路径替换为本地class路径
-        if (byteCode != null) {
-            ClassFormat classFormat2 = new ClassFormat();
-            classFormat2.parse(byteCode);
-        }
+//        byte[] byteCode = readFile("/Users/juneleo/Desktop/Main.class"); // 将路径替换为本地class路径
+//        if (byteCode != null) {
+//            ClassFormat classFormat2 = new ClassFormat();
+//            classFormat2.parse(byteCode);
+//        }
     }
 
     private static byte[] readFile(String path) {

@@ -22,11 +22,8 @@ public class ConstantMethodRefInfoParse extends ConstantInfoParse implements Par
 
     @Override
     public String toString() {
-        return "ConstantMethodRefInfoParse{" +
-                "classIndex=" + classIndex +
-                ", nameAndTypeIndex=" + nameAndTypeIndex +
-                ", tag=" + tag +
-                ", name=" + name +
-                '}';
+        return "[ " +"name=" + name +
+                ", classIndex=" + classIndex +
+                ", nameAndTypeIndex=" + nameAndTypeIndex+ " ]";
     }
 }

@@ -19,10 +19,7 @@ public class ConstantDoubleInfoParse extends ConstantInfoParse implements Parse 
 
     @Override
     public String toString() {
-        return "ConstantDoubleInfoParse{" +
-                "value=" + value +
-                ", tag=" + tag +
-                ", name=" + name +
-                '}';
+        return "[ " +"name=" + name +
+                ", value=" + value + " ]";
     }
 }

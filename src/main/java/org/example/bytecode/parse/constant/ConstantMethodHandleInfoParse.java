@@ -22,11 +22,8 @@ public class ConstantMethodHandleInfoParse extends ConstantInfoParse implements 
 
     @Override
     public String toString() {
-        return "ConstantMethodHandleInfoParse{" +
-                "referenceKind=" + referenceKind +
-                ", referenceIndex=" + referenceIndex +
-                ", tag=" + tag +
-                ", name=" + name +
-                '}';
+        return "[ " +"name=" + name +
+                ", referenceKind=" + referenceKind +
+                ", referenceIndex=" + referenceIndex + " ]";
     }
 }

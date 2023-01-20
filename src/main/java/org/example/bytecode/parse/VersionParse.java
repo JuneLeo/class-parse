@@ -10,9 +10,10 @@ public class VersionParse implements Parse {
     @Override
     public int parse(int start, byte[] bytes) {
         minor = Utils.getU2Int(start, bytes);
+        System.out.println("minor: " + minor);
         start += 2;
         major = Utils.getU2Int(start, bytes);
-
+        System.out.println("major: " + major);
         return start + 2;
     }
 

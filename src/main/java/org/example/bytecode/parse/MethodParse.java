@@ -23,11 +23,12 @@ public class MethodParse implements Parse {
         methodCount = Utils.getU2Int(start, bytes);
         start += 2;
         for (int i = 0; i < methodCount; i++) {
+            System.out.println("---------------------------------------");
             MethodItemParse methodItemParse = new MethodItemParse(constantParse);
             start = methodItemParse.parse(start, bytes);
             methodItemParses.add(methodItemParse);
         }
-
+        System.out.println("---------------------------------------");
         return start;
     }
 
@@ -71,7 +72,6 @@ public class MethodParse implements Parse {
             start += 2;
             descriptorIndex = Utils.getU2Int(start, bytes);
             System.out.println("descriptor: " + constantParse.getUtfConstant(descriptorIndex));
-            System.out.println("flags: " + accessFlag);
             start += 2;
             attributeCount = Utils.getU2Int(start, bytes);
             start += 2;

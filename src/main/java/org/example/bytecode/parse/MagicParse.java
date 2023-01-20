@@ -23,6 +23,8 @@ public class MagicParse implements Parse { //u4
 
         magic = stringBuilder.toString();
 
+        System.out.println("magic: " + magic);
+
         return start + magicLength;
     }
 

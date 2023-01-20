@@ -18,7 +18,7 @@ public class ConstantParse implements Parse {
     public int parse(int start, byte[] bytes) {
 
         constantPoolCount = Utils.getU2Int(start, bytes);
-
+        System.out.println("Constant pool: ");
         // 常量池中的数量= constantPoolCount-1
         start += 2;
         for (int i = 0; i < constantPoolCount - 1; i++) {
@@ -28,6 +28,7 @@ public class ConstantParse implements Parse {
             p.setIndex(i + 1);
             constantParse.add(p);
             start = p.parse(start, bytes);
+            System.out.println("    #" + (i + 1) +" = " + p);
         }
 
         return start;

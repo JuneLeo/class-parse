@@ -1,8 +1,143 @@
 # class-parse
 
+# Example
+* Person
+```java
+public class Person {
+    public String name;
+    public int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void play(String name) {
+        if (name.equals("basket")) {
+            System.out.println("篮球");
+        }
+
+    }
+}
+```
+* Person 解析
+```
+magic: CAFEBABE
+minor: 0
+major: 52
+Constant pool: 
+    #1 = [ name=CONSTANT_Methodref_info, classIndex=10, nameAndTypeIndex=27 ]
+    #2 = [ name=CONSTANT_Fieldref_info, classIndex=9, nameAndTypeIndex=28 ]
+    #3 = [ name=CONSTANT_Fieldref_info, classIndex=9, nameAndTypeIndex=29 ]
+    #4 = [ name=CONSTANT_String_info, index=30 ]
+    #5 = [ name=CONSTANT_Methodref_info, classIndex=31, nameAndTypeIndex=32 ]
+    #6 = [ name=CONSTANT_Fieldref_info, classIndex=33, nameAndTypeIndex=34 ]
+    #7 = [ name=CONSTANT_String_info, index=35 ]
+    #8 = [ name=CONSTANT_Methodref_info, classIndex=36, nameAndTypeIndex=37 ]
+    #9 = [ name=CONSTANT_Class_info, index=38 ]
+    #10 = [ name=CONSTANT_Class_info, index=39 ]
+    #11 = [ name=CONSTANT_Utf8_info, length=4, value='name ]
+    #12 = [ name=CONSTANT_Utf8_info, length=18, value='Ljava/lang/String; ]
+    #13 = [ name=CONSTANT_Utf8_info, length=3, value='age ]
+    #14 = [ name=CONSTANT_Utf8_info, length=1, value='I ]
+    #15 = [ name=CONSTANT_Utf8_info, length=6, value='<init> ]
+    #16 = [ name=CONSTANT_Utf8_info, length=22, value='(Ljava/lang/String;I)V ]
+    #17 = [ name=CONSTANT_Utf8_info, length=4, value='Code ]
+    #18 = [ name=CONSTANT_Utf8_info, length=15, value='LineNumberTable ]
+    #19 = [ name=CONSTANT_Utf8_info, length=18, value='LocalVariableTable ]
+    #20 = [ name=CONSTANT_Utf8_info, length=4, value='this ]
+    #21 = [ name=CONSTANT_Utf8_info, length=20, value='Lorg/example/Person; ]
+    #22 = [ name=CONSTANT_Utf8_info, length=4, value='play ]
+    #23 = [ name=CONSTANT_Utf8_info, length=21, value='(Ljava/lang/String;)V ]
+    #24 = [ name=CONSTANT_Utf8_info, length=13, value='StackMapTable ]
+    #25 = [ name=CONSTANT_Utf8_info, length=10, value='SourceFile ]
+    #26 = [ name=CONSTANT_Utf8_info, length=11, value='Person.java ]
+    #27 = [ name=CONSTANT_NameAndType_info, nameIndex=15, signatureIndex=40 ]
+    #28 = [ name=CONSTANT_NameAndType_info, nameIndex=11, signatureIndex=12 ]
+    #29 = [ name=CONSTANT_NameAndType_info, nameIndex=13, signatureIndex=14 ]
+    #30 = [ name=CONSTANT_Utf8_info, length=6, value='basket ]
+    #31 = [ name=CONSTANT_Class_info, index=41 ]
+    #32 = [ name=CONSTANT_NameAndType_info, nameIndex=42, signatureIndex=43 ]
+    #33 = [ name=CONSTANT_Class_info, index=44 ]
+    #34 = [ name=CONSTANT_NameAndType_info, nameIndex=45, signatureIndex=46 ]
+    #35 = [ name=CONSTANT_Utf8_info, length=6, value='篮球 ]
+    #36 = [ name=CONSTANT_Class_info, index=47 ]
+    #37 = [ name=CONSTANT_NameAndType_info, nameIndex=48, signatureIndex=23 ]
+    #38 = [ name=CONSTANT_Utf8_info, length=18, value='org/example/Person ]
+    #39 = [ name=CONSTANT_Utf8_info, length=16, value='java/lang/Object ]
+    #40 = [ name=CONSTANT_Utf8_info, length=3, value='()V ]
+    #41 = [ name=CONSTANT_Utf8_info, length=16, value='java/lang/String ]
+    #42 = [ name=CONSTANT_Utf8_info, length=6, value='equals ]
+    #43 = [ name=CONSTANT_Utf8_info, length=21, value='(Ljava/lang/Object;)Z ]
+    #44 = [ name=CONSTANT_Utf8_info, length=16, value='java/lang/System ]
+    #45 = [ name=CONSTANT_Utf8_info, length=3, value='out ]
+    #46 = [ name=CONSTANT_Utf8_info, length=21, value='Ljava/io/PrintStream; ]
+    #47 = [ name=CONSTANT_Utf8_info, length=19, value='java/io/PrintStream ]
+    #48 = [ name=CONSTANT_Utf8_info, length=7, value='println ]
+flags: ACC_PUBLIC,ACC_SUPER
+---------------------------------------
+flags: ACC_PUBLIC
+filed: name
+descriptor: Ljava/lang/String;
+---------------------------------------
+flags: ACC_PUBLIC
+filed: age
+descriptor: I
+---------------------------------------
+flags: ACC_PUBLIC
+method: <init>
+descriptor: (Ljava/lang/String;I)V
+Code:
+    maxStack=2  maxLocals=3
+        0: aload_0
+        1: invokespecial java/lang/Object  <init>  ()V
+        4: aload_0
+        5: aload_1
+        6: putfield org/example/Person  name  Ljava/lang/String;
+        9: aload_0
+        10: iload_2
+        11: putfield org/example/Person  age  I
+        14: return
+LineNumberTable:
+    line 8：0
+    line 9：4
+    line 10：9
+    line 11：14
+LocalVariableTable:
+    Start=0, Length=15, Slot=0, nameIndex=this, descriptorIndex=Lorg/example/Person;
+    Start=0, Length=15, Slot=1, nameIndex=name, descriptorIndex=Ljava/lang/String;
+    Start=0, Length=15, Slot=2, nameIndex=age, descriptorIndex=I
+---------------------------------------
+flags: ACC_PUBLIC
+method: play
+descriptor: (Ljava/lang/String;)V
+Code:
+    maxStack=2  maxLocals=2
+        0: aload_1
+        1: ldc basket
+        3: invokevirtual java/lang/String  equals  (Ljava/lang/Object;)Z
+        6: ifeq name
+        9: getstatic java/lang/System  out  Ljava/io/PrintStream;
+        12: ldc 篮球
+        14: invokevirtual java/io/PrintStream  println  (Ljava/lang/String;)V
+        17: return
+LineNumberTable:
+    line 15：0
+    line 16：9
+    line 18：17
+LocalVariableTable:
+    Start=0, Length=18, Slot=0, nameIndex=this, descriptorIndex=Lorg/example/Person;
+    Start=0, Length=18, Slot=1, nameIndex=name, descriptorIndex=Ljava/lang/String;
+StackMapTable:
+    frame_type=17
+---------------------------------------
+SourceFile: 
+    Person.java
+```
+# 解析接口
 ```java
 public interface Parse {
-int parse(int start, byte[] code);
+    int parse(int start, byte[] code);
 }
 ```
 * code：为class字节码
@@ -13,8 +148,9 @@ int parse(int start, byte[] code);
 # ClassFormat
 ```java
 public class ClassFormat {
-private List<Parse> parses = new ArrayList<>();
-
+    
+    private List<Parse> parses = new ArrayList<>();
+    
     public ClassFormat() {
         parses.add(new MagicParse()); //magic解析器
         parses.add(new VersionParse()); // 版本解析器
@@ -35,147 +171,4 @@ private List<Parse> parses = new ArrayList<>();
         }
     }
 }
-```
-# MagicParse
-```java
-public class MagicParse implements Parse { //u4
-
-    public String magic;
-
-    @Override
-    public int parse(int start, byte[] bytes) {
-        int magicLength = 4; // magic 长度为u4
-        byte[] magicCode = new byte[magicLength];
-        System.arraycopy(bytes, start, magicCode, 0, magicLength);
-        StringBuilder stringBuilder = new StringBuilder();
-        for (byte b : magicCode) {
-            int value = Byte.toUnsignedInt(b);
-            stringBuilder.append(Integer.toHexString(value).toUpperCase());
-        }
-
-        if (!"CAFEBABE".equals(stringBuilder.toString())) {
-            throw new RuntimeException("class error");
-        }
-
-        magic = stringBuilder.toString();
-
-        return start + magicLength;
-    }
-
-    @Override
-    public String toString() {
-        return "MagicParse{" +
-                "magic='" + magic + '\'' +
-                '}';
-    }
-}
-```
-# VersionParse
-```java
-public class VersionParse implements Parse {
-public int minor; // u2
-public int major; // u2
-
-    @Override
-    public int parse(int start, byte[] bytes) {
-        minor = Utils.getU2Int(start, bytes); // u2 minor
-        start += 2;
-        major = Utils.getU2Int(start, bytes); // u2 major
-        return start + 2;
-    }
-
-    @Override
-    public String toString() {
-        return "VersionParse{" +
-                "minor=" + minor +
-                ", major=" + major +
-                '}';
-    }
-}
-```
-# getU2Int
-```java
-public static int getU2Int(int start, byte[] bytes) {
-        byte[] versionCode = new byte[2];
-        System.arraycopy(bytes, start, versionCode, 0, 2);// 2个字节
-        int high = Byte.toUnsignedInt(versionCode[0]);  // 第一个字节是高位，这里将byte转位无符号的int
-        int low = Byte.toUnsignedInt(versionCode[1]);  // 第二个字节是低位，这里将byte转位无符号的int
-        return high << 8 | low;    // 高位左移8位 ｜ 低位就是int值
-}
-```
-
-# Code解析
-```java
-public class CodeParse extends AttributeFormatParse {
-    public int attributeNameIndex;
-    public int attributeLength;
-    public int maxStack;
-    public int maxLocals;
-    public int codeLength;
-
-    public int exceptionTableLength;
-
-    public int attributesCount;
-
-
-    private ConstantParse constantParse;
-
-    public CodeParse(int length, ConstantParse constantParse) {
-        super(length);
-        this.constantParse = constantParse;
-    }
-
-    @Override
-    public int parse(int start, byte[] code) {
-        int index = start;
-        maxStack = Utils.getU2Int(index, code);//u2
-        index += 2;
-        maxLocals = Utils.getU2Int(index, code); //u2
-        index += 2;
-        codeLength = Utils.getU4Int(index, code); //u4
-        index += 4;
-
-        int l = index + codeLength;
-        while (index < l) {
-            int cmd = Utils.getU1Int(index, code);
-            index += 1;
-            String cmdStr = Utils.getCMD(cmd); // 这里是复制的asm中的字节码数组
-            System.out.print(cmdStr);
-            int paramsLength = Utils.getParamsLength(cmd); // 这里是复制的asm中的字节码后面参数的length数组
-            if (paramsLength >= 0) {
-                if (paramsLength == 1) {
-                    int u1Int = Utils.getU1Int(index, code);
-                    Object utfConstant = constantParse.getUtfConstant(u1Int);
-                    System.out.print(" " + String.valueOf(utfConstant));
-                } else if (paramsLength == 2) {
-                    int u2Int = Utils.getU2Int(index, code);
-                    Object utfConstant = constantParse.getUtfConstant(u2Int);
-                    System.out.print(" " + String.valueOf(utfConstant));
-                } else {
-                    for (int i = 0; i < paramsLength; i++) {
-                        System.out.print(" " + Utils.getU1Int(index + i, code));
-                    }
-                }
-                index += paramsLength;
-            } else {
-                break;
-            }
-            System.out.print("\n");
-        }
-        index += codeLength;
-
-    	// 这里是 exception和attribute，attribute主要解析LineNumberTable和LocalVariableTable即可，后续实现
-//        exceptionTableLength = Utils.getU2Int(index, code);
-//        index += 2;
-//        // todo exception info
-//        attributeLength = Utils.getU2Int(index, code);
-//        index += 2;
-//        // todo attribute
-
-
-        return start + length;
-    }
-}
-
-```
 

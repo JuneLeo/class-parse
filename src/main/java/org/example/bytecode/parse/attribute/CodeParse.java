@@ -46,9 +46,9 @@ public class CodeParse extends AttributeFormatParse {
         int codeIndex = index;
         while (codeIndex < l) {
             int cmd = Utils.getU1Int(codeIndex, code);
-            codeIndex += 1;
             String cmdStr = Utils.getCMD(cmd);
-            System.out.print("        "+cmdStr);
+            System.out.print("        " + (codeIndex - index) + ": " + cmdStr);
+            codeIndex += 1;
             int paramsLength = Utils.getParamsLength(cmd);
             if (paramsLength >= 0) {
                 if (paramsLength == 1) {

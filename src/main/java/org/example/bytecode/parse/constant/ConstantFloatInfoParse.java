@@ -19,10 +19,7 @@ public class ConstantFloatInfoParse extends ConstantInfoParse implements Parse {
 
     @Override
     public String toString() {
-        return "ConstantFloatInfoParse{" +
-                "value=" + value +
-                ", tag=" + tag +
-                ", name=" + name +
-                '}';
+        return  "[ " +"name=" + name +
+                ", value=" + value + " ]";
     }
 }

@@ -22,6 +22,7 @@ public class FieldParse implements Parse {
         fieldCount = Utils.getU2Int(start, bytes);
         start += 2;
         for (int i = 0; i < fieldCount; i++) {
+            System.out.println("---------------------------------------");
             FieldItemParse fieldItemParse = new FieldItemParse(constantParse);
             start = fieldItemParse.parse(start, bytes);
             fieldItemParses.add(fieldItemParse);
@@ -57,8 +58,10 @@ public class FieldParse implements Parse {
             accessFlag = new AccessFlagParse();
             start = accessFlag.parse(start, bytes);
             nameIndex = Utils.getU2Int(start, bytes);
+            System.out.println("filed: " + Utils.getUtf(nameIndex, constantParse));
             start += 2;
             descriptorIndex = Utils.getU2Int(start, bytes);
+            System.out.println("descriptor: " + Utils.getUtf(descriptorIndex, constantParse));
             start += 2;
             attributeCount = Utils.getU2Int(start, bytes);
             start += 2;
