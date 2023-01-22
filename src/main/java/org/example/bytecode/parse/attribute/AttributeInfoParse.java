@@ -62,6 +62,9 @@ public class AttributeInfoParse implements Parse {
             case "BootstrapMethods":
                 attributeFormatParse = new BootstrapMethodsParse(attributeLength, constantParse);
                 break;
+            case "LocalVariableTypeTable":
+                attributeFormatParse = new LocalVariableTypeTableParse(attributeLength,constantParse);
+                break;
             default:
                 attributeFormatParse = new Info(attributeLength);
                 break;

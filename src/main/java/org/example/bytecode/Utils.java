@@ -73,7 +73,9 @@ public class Utils {
     public static final short UNDEFINED = -1;
     public static final short UNPREDICTABLE = -2;
     public static final short RESERVED = -3;
-
+    /**
+     * from asm
+     */
     public static final String[] OPCODE_NAMES = {
             "nop", "aconst_null", "iconst_m1", "iconst_0", "iconst_1",
             "iconst_2", "iconst_3", "iconst_4", "iconst_5", "lconst_0",
@@ -128,6 +130,9 @@ public class Utils {
         return OPCODE_NAMES[cmd];
     }
 
+    /**
+     * from asm
+     */
     public static final short[] NO_OF_OPERANDS = {
             0/*nop*/, 0/*aconst_null*/, 0/*iconst_m1*/, 0/*iconst_0*/,
             0/*iconst_1*/, 0/*iconst_2*/, 0/*iconst_3*/, 0/*iconst_4*/,
