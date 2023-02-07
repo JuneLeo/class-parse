@@ -44,11 +44,10 @@ public class MethodParse implements Parse {
         public AccessFlagParse accessFlag;
         public int nameIndex;
         public int descriptorIndex;
-        public int attributeCount;
-
-        public List<AttributeInfoParse> attributeInfoPars = new ArrayList<>();
 
         private ConstantParse constantParse;
+
+        private AttributeParse attributeParse;
 
         public MethodItemParse(ConstantParse constantParse) {
             this.constantParse = constantParse;
@@ -73,13 +72,8 @@ public class MethodParse implements Parse {
             descriptorIndex = Utils.getU2Int(start, bytes);
             System.out.println("descriptor: " + constantParse.getUtfConstant(descriptorIndex));
             start += 2;
-            attributeCount = Utils.getU2Int(start, bytes);
-            start += 2;
-            for (int j = 0; j < attributeCount; j++) {
-                AttributeInfoParse attributeInfoParse = new AttributeInfoParse(constantParse);
-                start = attributeInfoParse.parse(start, bytes);
-                attributeInfoPars.add(attributeInfoParse);
-            }
+            attributeParse = new AttributeParse(constantParse);
+            start = attributeParse.parse(start, bytes);
             return start;
         }
 
@@ -90,8 +84,7 @@ public class MethodParse implements Parse {
                     "accessFlag=" + accessFlag +
                     ", nameIndex=" + nameIndex +
                     ", descriptorIndex=" + descriptorIndex +
-                    ", attributeCount=" + attributeCount +
-                    ", attributeInfoPars=" + attributeInfoPars +
+                    ", attributeInfo=" + attributeParse +
                     '}';
         }
     }

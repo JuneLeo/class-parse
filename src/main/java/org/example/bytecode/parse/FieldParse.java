@@ -43,9 +43,7 @@ public class FieldParse implements Parse {
         public AccessFlagParse accessFlag;
         public int nameIndex;
         public int descriptorIndex;
-        public int attributeCount;
-
-        public List<AttributeInfoParse> attributeInfoPars = new ArrayList<>();
+        public AttributeParse attributeParse;
 
         private ConstantParse constantParse;
 
@@ -63,13 +61,8 @@ public class FieldParse implements Parse {
             descriptorIndex = Utils.getU2Int(start, bytes);
             System.out.println("descriptor: " + Utils.getUtf(descriptorIndex, constantParse));
             start += 2;
-            attributeCount = Utils.getU2Int(start, bytes);
-            start += 2;
-            for (int j = 0; j < attributeCount; j++) {
-                AttributeInfoParse attributeInfoParse = new AttributeInfoParse(constantParse);
-                start = attributeInfoParse.parse(start, bytes);
-                attributeInfoPars.add(attributeInfoParse);
-            }
+            attributeParse = new AttributeParse(constantParse);
+            start = attributeParse.parse(start, bytes);
             return start;
         }
 
@@ -79,8 +72,7 @@ public class FieldParse implements Parse {
                     "accessFlag=" + accessFlag +
                     ", nameIndex=" + nameIndex +
                     ", descriptorIndex=" + descriptorIndex +
-                    ", attributeCount=" + attributeCount +
-                    ", attributeInfoPars=" + Utils.getListToString(attributeInfoPars) +
+                    ", attributeInfo=" + attributeParse +
                     '}';
         }
     }
