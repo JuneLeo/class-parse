@@ -1,6 +1,7 @@
 package org.example.bytecode.parse.attribute;
 
 import org.example.bytecode.Utils;
+import org.example.bytecode.parse.AttributeParse;
 import org.example.bytecode.parse.ConstantParse;
 import org.example.bytecode.parse.constant.Parse;
 
@@ -16,9 +17,7 @@ public class CodeParse extends AttributeFormatParse {
 
     public int exceptionTableLength;
 
-    public int attributeCount;
-
-    public List<AttributeInfoParse> attributeInfoPars = new ArrayList<>();
+     public AttributeParse attributeParse;
 
     public List<ExceptionInfoParse> exceptionInfoParses = new ArrayList<>();
 
@@ -86,13 +85,8 @@ public class CodeParse extends AttributeFormatParse {
             }
         }
 
-        attributeCount = Utils.getU2Int(index, code);
-        index += 2;
-        for (int j = 0; j < attributeCount; j++) {
-            AttributeInfoParse attributeInfoParse = new AttributeInfoParse(constantParse);
-            index = attributeInfoParse.parse(index, code);
-            attributeInfoPars.add(attributeInfoParse);
-        }
+        attributeParse = new AttributeParse(constantParse);
+        attributeParse.parse(index, code);
 
         return start + length;
     }
