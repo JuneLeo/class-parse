@@ -45,7 +45,7 @@ public class AccessFlagParse implements Parse {
         ACC_PROTECTED(0x0004),     // Declared protected; may be accessed within subclasses.
         ACC_STATIC(0x0008),     // Declared static.
         ACC_FINAL(0x0010),     // Declared final; no subclasses allowed.
-        ACC_SUPER(0x0020),     // Treat superclass methods specially when invoked by the invokespecial instruction.
+        ACC_SYNCHRONIZED(0x0020),     // Treat superclass methods specially when invoked by the invokespecial instruction.
         ACC_VOLATILE(0x0040),     // Declared volatile; cannot be cached.
         ACC_TRANSIENT(0x0080),     // Declared transient; not written or read by a persistent object manager.
         ACC_NATIVE(0x0100),     // Declared native; implemented in a language other than Java.

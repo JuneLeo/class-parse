@@ -4,6 +4,7 @@ public abstract class ConstantInfoParse implements Index,Parse {
     public int tag;
     public String name;
     public int index;
+    public int realIndex;
 
 
     public ConstantInfoParse(int tag, String name) {
@@ -14,5 +15,8 @@ public abstract class ConstantInfoParse implements Index,Parse {
     @Override
     public void setIndex(int index) {
         this.index = index;
+    }
+    public void setRealIndex(int index) {
+        this.realIndex = index;
     }
 }

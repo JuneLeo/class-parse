@@ -23,7 +23,7 @@ public class AttributeInfoParse implements Parse {
         attributeLength = Utils.getU4Int(start, bytes);
         start += 4;
 
-        String utfConstant = String.valueOf(constantParse.getUtfConstant(nameIndex));
+        String utfConstant = String.valueOf(constantParse.getUtfConstant(nameIndex, false));
 
         switch (utfConstant) {
             case "Code":
@@ -63,7 +63,7 @@ public class AttributeInfoParse implements Parse {
                 attributeFormatParse = new BootstrapMethodsParse(attributeLength, constantParse);
                 break;
             case "LocalVariableTypeTable":
-                attributeFormatParse = new LocalVariableTypeTableParse(attributeLength,constantParse);
+                attributeFormatParse = new LocalVariableTypeTableParse(attributeLength, constantParse);
                 break;
             default:
                 attributeFormatParse = new Info(attributeLength);

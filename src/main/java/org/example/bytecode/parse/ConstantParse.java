@@ -11,24 +11,31 @@ public class ConstantParse implements Parse {
     public int constantPoolCount;
 
 
-    private List<ConstantInfoParse> constantParse = new ArrayList<>();
+    private ConstantInfoParse[] constantParse;
 
 
     @Override
     public int parse(int start, byte[] bytes) {
 
         constantPoolCount = Utils.getU2Int(start, bytes);
+        constantParse = new ConstantInfoParse[constantPoolCount];
         System.out.println("Constant pool: ");
         // 常量池中的数量= constantPoolCount-1
         start += 2;
-        for (int i = 0; i < constantPoolCount - 1; i++) {
+
+        for (int i = 1; i < constantPoolCount; i++) {
+
             int tag = Utils.getU1Int(start, bytes);
             start += 1;
             ConstantInfoParse p = getConstantParse(tag);
-            p.setIndex(i + 1);
-            constantParse.add(p);
+            p.setIndex(i);
             start = p.parse(start, bytes);
-            System.out.println("    #" + (i + 1) +" = " + p);
+            constantParse[i] = p;
+            System.out.println("    #" + (i) + " = " + p);
+
+            if (p instanceof ConstantLongInfoParse || p instanceof ConstantDoubleInfoParse) {
+                i++;
+            }
         }
 
         return start;
@@ -40,7 +47,6 @@ public class ConstantParse implements Parse {
 
         return "ConstantPoolParse{" +
                 "constantPoolCount=" + constantPoolCount +
-                ", constantParse=" + Utils.getListToString(constantParse) +
                 '}';
     }
 
@@ -74,20 +80,21 @@ public class ConstantParse implements Parse {
                 return new ConstantMethodTypeInfoParse(tag, "CONSTANT_Method-type_info");
             case 18:
                 return new ConstantInvokeDynamicInfoParse(tag, "CONSTANT_Invoke-Dynamic_info");
+            default:
+                return null;
         }
-        return null;
     }
 
-
     public Object getUtfConstant(int nameIndex) {
-        ConstantInfoParse infoParse = null;
-        for (ConstantInfoParse parse : constantParse) {
-            if (parse.index == nameIndex) {
-                infoParse = parse;
-            }
-        }
+        return getUtfConstant(nameIndex, true);
+    }
+
+    public Object getUtfConstant(int nameIndex, boolean realIndex) {
+        ConstantInfoParse infoParse = constantParse[nameIndex];
+
         if (infoParse == null) {
-            throw new RuntimeException("getUtfConstant (infoParse == null) error");
+//            throw new RuntimeException("getUtfConstant (infoParse == null) error");
+            return "";
         }
         if (infoParse.getClass().equals(ConstantUtf8InfoParse.class)) { //CONSTANT_Utf8_info
             return ((ConstantUtf8InfoParse) infoParse).value;
