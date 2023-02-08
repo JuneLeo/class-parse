@@ -202,8 +202,7 @@ public class StackMapTableParse extends AttributeFormatParse {
         public int parse(int start, byte[] code) {
             offsetDelta = Utils.getU2Int(start, code);
             start += 2;
-            numberOfLocals = Utils.getU2Int(start, code);
-            start += 2;
+            numberOfLocals = frameType - 251;
             for (int i = 0; i < numberOfLocals; i++) {
                 VerificationTypeInfoParse verificationTypeInfoParse = VerificationTypeInfoParse.get(start, code, constantParse);
                 start += 1;

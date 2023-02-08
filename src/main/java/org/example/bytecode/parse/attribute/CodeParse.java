@@ -227,15 +227,12 @@ public class CodeParse extends AttributeFormatParse {
                             for (short i : paramType) {
                                 if (i == Utils.T_BYTE) {
                                     int u1Int = Utils.getU1Int(codeIndex, code);
-                                    codeIndex += 1;
                                     System.out.print(" " + u1Int);
                                 } else if (i == Utils.T_SHORT) {
                                     int u2Int = Utils.getU2Int(codeIndex, code);
-                                    codeIndex += 2;
                                     System.out.print(" " + u2Int);
                                 } else if (i == Utils.T_INT) {
                                     int u4Int = Utils.getU4Int(codeIndex, code);
-                                    codeIndex += 4;
                                     System.out.print(" " + u4Int);
                                 }
                             }
@@ -263,7 +260,7 @@ public class CodeParse extends AttributeFormatParse {
             attributeParse = new AttributeParse(constantParse);
             attributeParse.parse(index, code);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
 
         return start + length;
