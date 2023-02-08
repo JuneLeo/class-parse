@@ -1,5 +1,52 @@
 # class-parse
 
+# Parse
+![parse](art/parse.png)
+
+每个颜色代表一种解析器
+
+# code table
+
+![parse](art/code_table.png)
+
+# Constant Pool
+|类型	| 字段	                   |描述|
+|  ----  |-----------------------|----|
+|CONSTANT_Utf8_info	| tag/length/bytes(u1)	 |UTF-8字符串|
+|CONSTANT_Integer_info| 	tag/bytes(u4)	       |int|
+|CONSTANT_Float_info	| tag/bytes(u4)         |	float|
+|CONSTANT_Long_info| 	tag/bytes(u8)        |	long|
+|CONSTANT_Double_info	| tag/bytes(u8)	        |double|
+|CONSTANT_Class_info	| tag/index             |	类或者接口符号引用|
+|CONSTANT_String_info	| tag/index	            |字符串类型字面量|
+|CONSTANT_Fieldref_info| 	tag/index类/index	    |字段符号引用|
+|CONSTANT_Methodref_info	| tag/index类/index      |	类中方法符号引用|
+|CONSTANT_Interface-Methodref_info	| tag/index接口类/index	   |接口中方法符号引用|
+|CONSTANT_NameAndType_info| 	tag/index名称/index签名	 |字段或者方法的部分符号引用|
+|CONSTANT_Method-Handle_info	|                       |	方法句柄|
+|CONSTANT_Method-type_info	|                       | 	标识方法类型               |
+|CONSTANT_Invoke-Dynamic_info| 	                     |	动态方法调用点|
+
+
+# Attribute 
+
+|类型	|描述|
+|----|----|
+|Code	|方法表|
+|LineNumberTable	|调试表|
+|LocalVariableTable	|本地变量表|
+|SourceFile	|源文件表|
+|Exceptions	|异常表|
+|ConstantValue|	异常表|
+|InnerClasses	|内部类表|
+|Deprecated	|废弃标识|
+|Synthetic	|表示方法或者字段|
+|StackMapTable|	类型检查器|
+|Signature	|泛型的方法签名 - 泛型会类型擦除|
+|BootstrapMethods	|invokedymic相关|
+|LocalVariableTypeTable	|泛型相关|
+|…	|还有很多其他未解析的表|
+
 # Example
 * Person
 ```java

@@ -41,8 +41,8 @@ public class Main {
 //        ClassFormat classFormat = new ClassFormat();
 //        classFormat.parse(defaultByteCode);
         // 2.解析本地字节码
-        byte[] byteCode = readFile("/Users/juneleo/Desktop/NativeVcsManager.class"); // 将路径替换为本地class路径
-//        byte[] byteCode = readFile("/Users/juneleo/demo/java-demo/build/classes/java/main/org/example/Person.class"); // 将路径替换为本地class路径
+//        byte[] byteCode = readFile("/Users/juneleo/Desktop/NativeVcsManager.class"); // 将路径替换为本地class路径
+        byte[] byteCode = readFile("/Users/juneleo/demo/java-demo/build/classes/java/main/org/example/Person.class"); // 将路径替换为本地class路径
 
         if (byteCode != null) {
             ClassFormat classFormat2 = new ClassFormat();
