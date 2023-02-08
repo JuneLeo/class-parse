@@ -85,6 +85,21 @@ public class CodeParse extends AttributeFormatParse {
 
                         offset = (codeIndex - index) - 12 - no_pad_bytes - 1;
                         default_offset += offset;
+                        System.out.print(" { // " + low + " to " + high);
+                        System.out.print("\n");
+
+                        jump_table = new int[high - low + 1];
+                        for(int i=0; i < jump_table.length; i++) {
+                            jump_table[i] = offset +  Utils.getU4Int(codeIndex, code);
+                            codeIndex +=4;
+                        }
+                        for (int i = 0; i < jump_table.length; i++) {
+                            System.out.print("                  " + (i+1) + ": " + jump_table[i]);
+                            System.out.print("\n");
+                        }
+                        System.out.print("                  " +  "default: " + default_offset);
+                        System.out.print("\n");
+                        System.out.print("            }");
                     }
                     break;
 
@@ -97,16 +112,23 @@ public class CodeParse extends AttributeFormatParse {
                         match = new int[npairs];
                         jump_table = new int[npairs];
                         default_offset += offset;
-
+                        System.out.print(" { // " + npairs );
+                        System.out.print("\n");
                         for (int i = 0; i < npairs; i++) {
                             match[i] = Utils.getU4Int(codeIndex, code);
                             codeIndex += 4;
-
                             jump_table[i] = offset + Utils.getU4Int(codeIndex, code);
-
                             codeIndex += 4;
-
                         }
+
+                        for (int i = 0; i < jump_table.length; i++) {
+                            System.out.print("                  " + match[i] + ": " + jump_table[i]);
+                            System.out.print("\n");
+                        }
+                        System.out.print("                  " +  "default: " + default_offset);
+                        System.out.print("\n");
+                        System.out.print("            }");
+
                     }
                     break;
 
@@ -130,8 +152,8 @@ public class CodeParse extends AttributeFormatParse {
                     case Utils.IF_ICMPLT:
                     case Utils.IF_ICMPNE: {
                         int u2Int = Utils.getU2Int(codeIndex, code);
-                        codeIndex += 2;
                         System.out.print(" " + "#" + (codeIndex - index - 1 + u2Int));
+                        codeIndex += 2;
                     }
                     break;
 
