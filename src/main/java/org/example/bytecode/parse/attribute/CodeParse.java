@@ -184,6 +184,7 @@ public class CodeParse extends AttributeFormatParse {
                     case Utils.INVOKEINTERFACE:
                     case Utils.LDC_W:
                     case Utils.LDC2_W:
+                    case Utils.NEW:
                     case Utils.ANEWARRAY: {
                         int u2Int = Utils.getU2Int(codeIndex, code);
                         codeIndex += 2;
